@@ -1,12 +1,12 @@
 # README
 
-## How to
+## HOW TO
 
 1. Initiate a Conda environment with a python version>3.11
 2. Install all dependencies stipulated in requirements.txt
 3. Create a dotenv file in the /backend directory and add all API keys required for the build (in config.py)
-4. Initialize a local frontend server in the /backend directory : `python -m http.server 8080`
-5. Initialize a local backend server in the /frontend directory: `python app.py`
+4. Initialize a local frontend server in the /frontend directory : `python -m http.server 8080`
+5. Initialize a local backend server in the /backend directory: `python app.py`
 6. Access `http://localhost:8080/` via Google Chrome
 
 ## Commenting Conventions
