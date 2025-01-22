@@ -10,8 +10,8 @@ button {
 }
 
 body {
-  background-color: #ffffff; /* White background */
-  color: #333333; /* Dark text color for readability */
+  background-color: #ffffff;
+  color: #333333;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -23,25 +23,26 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-color: #f7f8fa; /* Light gray background for the chat container */
+  background-color: #f7f8fa;
   width: 100%;
   max-width: 1200px;
   height: 90vh;
   border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Lighter shadow for a subtle effect */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 header {
-  background-color: #ffffff; /* White background for header */
+  background-color: #ffffff;
   padding: 15px;
   text-align: center;
-  border-bottom: 1px solid #ddd; /* Light border for separation */
+  border-bottom: 1px solid #ddd;
 }
 
+/* Currently : LangChain AI Chatbot - Test Build v1 */
 header h1 {
-  font-size: 1.5rem; /* Slightly larger font size */
-  color: #2b35eb; /* Dark color for header text */
+  font-size: 1.5rem;
+  color: #2b35eb;
 }
 
 main {
@@ -54,19 +55,19 @@ main {
 }
 
 footer {
-  background-color: #ffffff; /* White background for footer */
+  background-color: #ffffff;
   display: flex;
   align-items: center;
   gap: 10px;
   padding: 15px;
-  border-top: 1px solid #ddd; /* Light border for footer */
+  border-top: 1px solid #ddd;
 }
 
 textarea {
   flex: 1;
-  background-color: #f1f1f1; /* Light background for textarea */
-  color: #333333; /* Dark text for better visibility */
-  border: 1px solid #ccc; /* Light border */
+  background-color: #f1f1f1;
+  color: #333333;
+  border: 1px solid #ccc;
   border-radius: 5px;
   padding: 10px;
   font-size: 1rem;
@@ -76,11 +77,11 @@ textarea {
 
 textarea:focus {
   outline: none;
-  border-color: #10a37f; /* Green outline on focus */
+  border-color: #10a37f;
 }
 
 button {
-  background-color: #2b35eb; /* Green button */
+  background-color: #2b35eb;
   color: white;
   border: none;
   border-radius: 5px;
@@ -90,7 +91,7 @@ button {
 }
 
 button:hover {
-  background-color: #4c55f5df; /* Darker green on hover */
+  background-color: #4c55f5df;
 }
 
 /* Chat Bubbles */
@@ -119,14 +120,14 @@ button:hover {
 }
 
 .message.user .bubble {
-  background-color: #2b35eb; /* Green background for user's messages */
+  background-color: #2b35eb; /* Blue background for user's messages */
   color: white;
   border-bottom-right-radius: 0;
 }
 
 .message.assistant .bubble {
   background-color: #e4e6eb; /* Light gray background for assistant's messages */
-  color: #333333; /* Dark color for assistant's text */
+  color: #333333;
   border-bottom-left-radius: 0;
 }
 

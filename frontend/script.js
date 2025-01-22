@@ -12,14 +12,14 @@ async function processInput() {
   // Show "Generating subqueries..." message
   addMessage("Subquery 생성중...", "assistant", true); // The third argument is for the new style
 
-  // Clear the input field
+  // Clear the input field after user input is processed
   document.getElementById("user-input").value = "";
 
-  // Step 1: Send the user input to the backend for splitting and processing subqueries
+  // Send the user input to the backend for splitting and processing subqueries
   try {
     const splitResponse = await fetch("http://localhost:5000/api/split-query", {
       method: "POST",
-      headers: { "Content-Type": "application/json" }, // Correct Content-Type
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ prompt: userInput }),
     });
 
@@ -38,10 +38,10 @@ async function processInput() {
 
     addMessage("Context 생성중...", "assistant", true); // The third argument is for the new style
 
-    // Save subquery outputs for the next step
+    // Save subquery outputs for fianl answer generation
     const subqueryOutputsString = JSON.stringify(subquery_outputs);
 
-    // Step 2: Send subquery outputs back to the backend for final answer generation
+    // Send subquery outputs back to the backend for final answer generation
     const finalAnswerResponse = await fetch(
       "http://localhost:5000/api/generate-final-answer",
       {
@@ -64,10 +64,10 @@ async function processInput() {
     // Extract merged context and final answer
     const { merged_context = "", final_answer = "" } = finalAnswerData;
 
-    // Display the merged context (optional, for debugging or user understanding)
+    // Display the merged context for debugging
     if (merged_context) {
       const { text } = merged_context; // merged_context에서 text만 추출
-      // Stringify and format the merged context for readability
+      // Stringify the context
       addMessage(`Context\n\n${JSON.stringify(text, null, 2)}`, "assistant");
     }
 
@@ -76,8 +76,8 @@ async function processInput() {
     // Display the final answer (optional, for debugging or user understanding)
 
     if (final_answer) {
-      const { text } = final_answer;
-      // Stringify and format the merged context for readability
+      const { text } = final_answer; // final_answer에서 text만 추출
+      // Stringify the merged context
       addMessage(
         `Final output\n\n${JSON.stringify(text, null, 2)}`,
         "assistant"
@@ -93,13 +93,15 @@ function addMessage(text, sender, isGenerating = false) {
   const message = document.createElement("div");
   message.classList.add("message", sender);
 
-  // If it's a "generating subqueries..." message, add specific class
+  // If it's a "generating subqueries..." type message, use a different CSS class
   if (isGenerating) {
     message.classList.add("generating");
   }
 
   const bubble = document.createElement("div");
 
+  // GPT returns output in Markdown format, so a markdown-to-HTML parser is required.
+  // 25-1-22 : For future build, use markdown-it to parse markdown to HTML.
   const formattedText = text.replace(/\n/g, "<br>");
 
   bubble.classList.add("bubble");
