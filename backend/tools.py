@@ -3,7 +3,6 @@ from langchain_google_community import GoogleSearchAPIWrapper
 from chains import llm  # Reuse the LLM instance from chains.py
 from config import GOOGLE_API_KEY, GOOGLE_CSE_ID
 
-# Initialize Google Search Tool
 search_tool = GoogleSearchAPIWrapper(google_api_key = GOOGLE_API_KEY, google_cse_id = GOOGLE_CSE_ID, k=5)
 
 @tool("external_search_required")

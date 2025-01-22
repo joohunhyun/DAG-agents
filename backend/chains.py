@@ -4,10 +4,9 @@ from langchain_openai import ChatOpenAI
 from config import OPENAI_API_KEY
 
 
-# Initialize LLM
 llm = ChatOpenAI(api_key=OPENAI_API_KEY, model="gpt-4o-mini-2024-07-18", max_tokens=1000)
 
-# Define the splitting chain with enhanced prompting
+# Query Splitting Prompt and Chaining
 split_query_prompt = PromptTemplate(
     input_variables=["query"],
     template="""
@@ -25,7 +24,7 @@ split_query_prompt = PromptTemplate(
 )
 split_query_chain = LLMChain(llm=llm, prompt=split_query_prompt)
 
-# Define the merging chain with enhanced prompting
+# Merging text created by subqueries and Chaining
 merge_context_prompt = PromptTemplate(
     input_variables=["subquery_outputs"],
     template="""
@@ -42,7 +41,7 @@ merge_context_prompt = PromptTemplate(
 )
 merge_context_chain = LLMChain(llm=llm, prompt=merge_context_prompt)
 
-# Define the final answer generation chain with enhanced prompting
+# Generating a final answer using the context and the initial user query // also chaining
 generate_final_answer_prompt = PromptTemplate(
     input_variables=["context", "user_query"],
     template="""
