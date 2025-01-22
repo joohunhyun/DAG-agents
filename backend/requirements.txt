@@ -1,0 +1,5 @@
+Flask==2.2.2
+langchain
+google-search-results
+langchain-openai
+langchain-google-community

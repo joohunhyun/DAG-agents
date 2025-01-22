@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Agentic DAG</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="chat-container">
+      <header>
+        <h1></h1>
+      </header>
+      <main id="chat-window">
+        <!-- Chat messages will appear here dynamically -->
+      </main>
+      <footer>
+        <textarea
+          id="user-input"
+          placeholder="Agentic AI와 대화를 시작해보세요!"
+        ></textarea>
+        <button id="send-btn" onclick="processInput()">요청</button>
+      </footer>
+    </div>
+    <!-- Include the script before the closing body tag -->
+    <script src="script.js"></script>
+  </body>
+</html>
