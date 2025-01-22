@@ -5,14 +5,14 @@
 ## TODO
 
 ### Chores
-- [] DS_Store to gitignore
-- [] Markdown-it to parse GPT's md text output to HTML
+- [ ] DS_Store to gitignore
+- [ ] Markdown-it to parse GPT's md text output to HTML
 
 ### Big fixes
-- [] The logic for mergining context and generating final output should be separated
-- [] Streaming-like text output effect using WebSocket
-- [] Add memory logic(backend) and previous conversations nav bar(frontend) -> This would require a DB
-- [] Social login feature -> DB required
+- [ ] The logic for mergining context and generating final output should be separated
+- [ ] Streaming-like text output effect using WebSocket
+- [ ] Add memory logic(backend) and previous conversations nav bar(frontend) -> This would require a DB
+- [ ] Social login feature -> DB required
 
 ---
 
