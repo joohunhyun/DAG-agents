@@ -1,6 +1,5 @@
 # README
 
----
 
 ## TODO
 
@@ -14,7 +13,6 @@
 - [ ] Add memory logic(backend) and previous conversations nav bar(frontend) -> This would require a DB
 - [ ] Social login feature -> DB required
 
----
 
 ## HOW TO
 
@@ -25,15 +23,11 @@
 5. Initialize a local backend server in the /backend directory: `python app.py`
 6. Access `http://localhost:8080/` via Google Chrome
 
----
 
 ## Commenting Conventions
 
 - Python
   - Use docstrings to describe functions `"""docstring_content"""`
-  -
-
----
 
 ## Commit Message Conventions
 
@@ -42,7 +36,6 @@ Activity: Commit Message
 ```
 
 - Activities:
-
   - `feat`: new features
   - `fix`: fix an error or issue
   - `chore` : not an operational code fix
