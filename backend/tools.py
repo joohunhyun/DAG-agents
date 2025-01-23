@@ -7,11 +7,11 @@ search_tool = GoogleSearchAPIWrapper(google_api_key = GOOGLE_API_KEY, google_cse
 
 @tool("external_search_required")
 def check_search_required(subquery: str) -> str:
-    """Check if a subquery requires external search."""
+    """Checks if a subquery requires external search."""
     decision_prompt = f"Does the following query require external search? Respond with 'Yes' or 'No'.\nQuery: {subquery}"
     return llm(decision_prompt)
 
 @tool("perform_external_search")
 def perform_external_search(query: str) -> str:
-    """Perform a Google search for the query and return the results."""
+    """Performs a Google search for the query and return the results."""
     return search_tool.run(query)

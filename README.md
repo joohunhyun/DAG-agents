@@ -7,11 +7,14 @@
 - [x] DS_Store to gitignore
 - [ ] Markdown-it to parse GPT's md text output to HTML -> 25-1-20: this is causing errors
 
-### Features
+### Refactors
 
 - [ ] Achieve parallellism through langchain parallel executions
-- [ ] The logic for mergining context and generating final output should be separated
+- [ ] The logic for merging context and generating final output should be separated
 - [ ] Streaming-like text output effect using WebSocket (current method : JS)
+
+### Features
+
 - [ ] Add memory logic(backend) and previous conversations nav bar(frontend) -> This would require a DB
 - [ ] Social login feature -> DB required
 
