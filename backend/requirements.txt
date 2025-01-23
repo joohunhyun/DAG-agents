@@ -1,5 +1,9 @@
-Flask==2.2.2
-langchain
-google-search-results
-langchain-openai
-langchain-google-community
+# Used pipreqs to generate this file
+
+Flask==3.1.0
+Flask_Cors==3.0.10
+Flask_Cors==5.0.0
+langchain==0.3.15
+langchain_google_community==2.0.4
+langchain_openai==0.3.1
+python-dotenv==1.0.1

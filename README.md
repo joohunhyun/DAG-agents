@@ -1,18 +1,19 @@
 # README
 
-
 ## TODO
 
-### Chores
-- [ ] DS_Store to gitignore
-- [ ] Markdown-it to parse GPT's md text output to HTML
+### Hotfixes
 
-### Big fixes
+- [x] DS_Store to gitignore
+- [ ] Markdown-it to parse GPT's md text output to HTML -> 25-1-20: this is causing errors
+
+### Features
+
+- [ ] Achieve parallellism through langchain parallel executions
 - [ ] The logic for mergining context and generating final output should be separated
-- [ ] Streaming-like text output effect using WebSocket
+- [ ] Streaming-like text output effect using WebSocket (current method : JS)
 - [ ] Add memory logic(backend) and previous conversations nav bar(frontend) -> This would require a DB
 - [ ] Social login feature -> DB required
-
 
 ## HOW TO
 
@@ -23,11 +24,11 @@
 5. Initialize a local backend server in the /backend directory: `python app.py`
 6. Access `http://localhost:8080/` via Google Chrome
 
-
 ## Commenting Conventions
 
 - Python
-  - Use docstrings to describe functions `"""docstring_content"""`
+  - _Requires_ docstring usage to describe functions `"""docstring_content"""`
+  - _Rquires_ description of function invocations
 
 ## Commit Message Conventions
 
