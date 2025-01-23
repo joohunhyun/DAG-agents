@@ -6,16 +6,12 @@ async function processInput() {
     return;
   }
 
-  // Display user's input
   addMessage(userInput, "user");
 
-  // Show "Generating subqueries..." message
   addMessage("Subquery 생성중...", "assistant", true); // The third argument is for the new style
 
-  // Clear the input field after user input is processed
   document.getElementById("user-input").value = "";
 
-  // Send the user input to the backend for splitting and processing subqueries
   try {
     const splitResponse = await fetch("http://localhost:5000/api/split-query", {
       method: "POST",
@@ -28,20 +24,19 @@ async function processInput() {
 
     const splitData = await splitResponse.json();
 
-    // Extract tasks (subqueries) and subquery outputs
     const { tasks = [], subquery_outputs = [] } = splitData;
 
-    // Display each task (subquery)
     for (const task of tasks) {
-      addMessage(task, "assistant");
+      await new Promise((resolve) => {
+        addMessage(task, "assistant");
+        setTimeout(resolve, 500); // Add delay for sequential effect
+      });
     }
 
-    addMessage("Context 생성중...", "assistant", true); // The third argument is for the new style
+    addMessage("Context 생성중...", "assistant", true); // Context generation in progress
 
-    // Save subquery outputs for fianl answer generation
     const subqueryOutputsString = JSON.stringify(subquery_outputs);
 
-    // Send subquery outputs back to the backend for final answer generation
     const finalAnswerResponse = await fetch(
       "http://localhost:5000/api/generate-final-answer",
       {
@@ -61,23 +56,17 @@ async function processInput() {
 
     const finalAnswerData = await finalAnswerResponse.json();
 
-    // Extract merged context and final answer
     const { merged_context = "", final_answer = "" } = finalAnswerData;
 
-    // Display the merged context for debugging
     if (merged_context) {
-      const { text } = merged_context; // merged_context에서 text만 추출
-      // Stringify the context
+      const { text } = merged_context; // Extract text from merged_context
       addMessage(`Context\n\n${JSON.stringify(text, null, 2)}`, "assistant");
     }
 
-    addMessage("Final output 생성중...", "assistant", true); // The third argument is for the new style
-
-    // Display the final answer (optional, for debugging or user understanding)
+    addMessage("Final output 생성중...", "assistant", true); // Final output generation in progress
 
     if (final_answer) {
-      const { text } = final_answer; // final_answer에서 text만 추출
-      // Stringify the merged context
+      const { text } = final_answer; // Extract text from final_answer
       addMessage(
         `Final output\n\n${JSON.stringify(text, null, 2)}`,
         "assistant"
@@ -86,6 +75,49 @@ async function processInput() {
   } catch (error) {
     addMessage(`Error: ${error.message}`, "assistant");
   }
+}
+
+// Streaming text effect : referenced the following JS file https://jsfiddle.net/47ebo2xk/
+
+/**
+ * Render each visible letter one at a time.
+ * @param ele HTMLElement - The element to render
+ * @param delay int - The delay between characters, in milliseconds
+ * @param onEach Function - Callback to be called after each letter
+ */
+async function typeContent(ele, delay = 25, onEach = null) {
+  if (!onEach) onEach = () => {};
+  let container = document.createElement("div");
+  let nodes = [...ele.childNodes];
+  while (nodes.length) {
+    container.appendChild(nodes.shift());
+  }
+  await (async function typeNodes(nodes, parent) {
+    for (let i = 0; i < nodes.length; i++) {
+      let node = nodes[i];
+      if (node.nodeType === 3) {
+        // Text
+        for (let char of node.nodeValue) {
+          parent.innerHTML += char;
+          onEach();
+          await new Promise((d) => setTimeout(d, delay));
+        }
+      } else if (node.nodeType === 1) {
+        // Element
+        let ele = document.createElement(node.tagName);
+        if (node.hasAttributes()) {
+          for (let attr of node.attributes) {
+            ele.setAttribute(attr.name, attr.value);
+          }
+        }
+        parent.appendChild(ele);
+        onEach();
+        if (node?.childNodes?.length) {
+          await typeNodes(node.childNodes, ele);
+        }
+      }
+    }
+  })(container.childNodes, ele);
 }
 
 function addMessage(text, sender, isGenerating = false) {
@@ -99,17 +131,22 @@ function addMessage(text, sender, isGenerating = false) {
   }
 
   const bubble = document.createElement("div");
-
-  // GPT returns output in Markdown format, so a markdown-to-HTML parser is required.
-  // 25-1-22 : For future build, use markdown-it to parse markdown to HTML.
-  const formattedText = text.replace(/\n/g, "<br>");
-
   bubble.classList.add("bubble");
-  bubble.innerHTML = formattedText;
-
   message.appendChild(bubble);
   chatWindow.appendChild(message);
 
-  // Scroll to the latest message
   chatWindow.scrollTop = chatWindow.scrollHeight;
+
+  // Streaming effect: Render text one character at a time
+  const renderStreamingText = async () => {
+    for (const char of text) {
+      bubble.innerHTML += char === "\n" ? "<br>" : char;
+      chatWindow.scrollTop = chatWindow.scrollHeight; // allow scrolling effect when the text is too long
+      await new Promise((resolve) => setTimeout(resolve, 25));
+    }
+  };
+
+  renderStreamingText().catch((err) =>
+    console.error("Error in streaming effect:", err)
+  );
 }
